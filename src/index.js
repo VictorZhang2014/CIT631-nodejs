@@ -4,16 +4,35 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const { SQL_STATEMENTS } = require('./database');
 
+// Create application/x-www-form-urlencoded parser
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 const app = express();
 
-const initializeDb = async () => {
-  let result = await sql`${SQL_STATEMENTS}`;
-  console.log(`数据库初始化成功！${result}`);
-}
-initializeDb();
+// const initializeDb = async () => {
+//   let result = await sql`${SQL_STATEMENTS}`;
+//   console.log(`数据库初始化成功！${result}`);
+// }
+// initializeDb();
 
 app.get('/', function (req, res) {
   res.status(200).send('home');
+});
+
+app.post('/login', urlencodedParser, async (req, res) => {
+  res.status(200).send(`login ${req.body}`);
+});
+
+app.post('/register', urlencodedParser, async (req, res) => {
+  res.status(200).send(`register ${req.body}`);
+});
+
+app.post('/passwordreset', urlencodedParser, async (req, res) => {
+  res.status(200).send(`passwordreset ${req.body}`);
+});
+
+app.get('/listusers', urlencodedParser, async (req, res) => {
+  res.status(200).send(`listusers`);
 });
 
 // app.post('/register', urlencodedParser, async (req, res) => {
