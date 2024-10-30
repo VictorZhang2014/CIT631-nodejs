@@ -1,4 +1,5 @@
 const express = require('express'); 
+const cors = require("cors");
 const bodyParser = require('body-parser');
 const path = require('path');
 const { 
@@ -24,6 +25,7 @@ const {
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 const app = express();
+app.use(cors()); // 配置 CORS 允许任意来源
 app.use(express.json()); 
 
 // initSQLFc();
